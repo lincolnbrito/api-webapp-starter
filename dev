@@ -20,7 +20,7 @@
 # Run gulp tasks
 # ./develop gulp
 
-#change current dir because docker only read .env in current dir
+#change current dir because docker only read .env in current docker-compose file dir
 cd docker 
 
 DOCKER="docker"
