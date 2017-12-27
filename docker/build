@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+docker build -f webapp/Dockerfile-vue -t lincolnbrito/webapp-vue:latest ./webapp
+docker build -f webapp/Dockerfile-angular -t lincolnbrito/webapp-angular:latest ./webapp
