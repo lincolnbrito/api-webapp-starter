@@ -2,3 +2,4 @@
 
 docker build -f webapp/Dockerfile-vue -t lincolnbrito/webapp-vue:latest ./webapp
 docker build -f webapp/Dockerfile-angular -t lincolnbrito/webapp-angular:latest ./webapp
+docker build -f api/Dockerfile -t lincolnbrito/api:latest ./api
