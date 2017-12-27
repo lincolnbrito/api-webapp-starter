@@ -1,0 +1,95 @@
+#!/bin/sh
+
+# Make sure we have our default command
+# ./develop
+
+# Make sure we pass-thru to docker-compose for
+# un-defined helpers
+# ./develop ps
+# ./develop up -d
+
+# Install composer deps
+# ./develop composer install
+
+# Run phpunit
+# ./develop test
+
+# Install node_modules dependencies
+# ./develop npm install
+
+# Run gulp tasks
+# ./develop gulp
+
+#change current dir because docker only read .env in current dir
+cd docker 
+
+DOCKER="docker"
+COMPOSE="docker-compose -f ./docker-compose.yml"
+
+# if we pass any arguments...
+if [ $# -gt 0 ]; then
+    # if "artisan" is used, pass-thru to "artisan"
+    if [ "$1" == "clean" ]; then
+        shift 1
+        $COMPOSE stop && $COMPOSE rm -f
+
+     # if "artisan" is used, pass-thru to "artisan"
+    elif [ "$1" == "destroy" ]; then
+        shift 1
+        $COMPOSE stop && $COMPOSE rm -f
+        $DOCKER volume rm $( $DOCKER volume ls -qf dangling=true )
+        
+    # if "artisan" is used, pass-thru to "artisan"
+    elif [ "$1" == "artisan" ]; then
+        shift 1        
+        $COMPOSE run --rm -w "//var//www//html" api php artisan "$@"
+
+    # If "composer" is used, pass-thru to "composer"
+    # inside a new container
+    elif [ "$1" == "composer" ]; then
+        shift 1
+        $COMPOSE run --rm -w "//var//www//html" api composer "$@"
+    
+    # If "test" is used, run unit tests,
+    # pass-thru any extra arguments to php-unit
+    elif [ "$1" == "test" ]; then
+        shift 1
+        $COMPOSE run --rm -w "//var//www//html" api ./vendor/bin/phpunit "$@"
+
+    # If "vue" is used, run npm
+    # from our node container
+    elif [ "$1" == "vue" ]; then
+        shift 1
+        $COMPOSE run --rm -w "//var//www//html" webapp-vue vue "$@"
+    
+    # If "vue" is used, run npm
+    # from our node container
+    elif [ "$1" == "angular" ]; then
+        shift 1
+        $COMPOSE run --rm -w "//var//www//html" webapp-angular ng "$@"
+        
+    # If "npm" is used, run npm
+    # from our node container
+    elif [ "$1" == "npm" ]; then        
+        shift 1
+        $COMPOSE run --rm -w "//var//www//html" webapp-vue npm "$@"    
+    
+    # If "gulp" is used, run gulp
+    # from our node container
+    elif [ "$1" == "gulp" ]; then
+        shift 1
+        $COMPOSE run --rm -w "//var/www/html" webapp-vue gulp "$@"
+    
+    # If "webpack" is used, run webpack
+    # from our node container
+    elif [ "$1" == "webpack" ]; then
+        shift 1
+        $COMPOSE run --rm -w "//var/www/html" webapp-vue webpack "$@"
+        
+    # Else, pass-thru args to docker-compose
+    else
+        $COMPOSE "$@"
+    fi
+else
+    $COMPOSE "$@"
+fi
