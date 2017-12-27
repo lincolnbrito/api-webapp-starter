@@ -53,14 +53,14 @@ services:
       MYSQL_USER: "${DB_USER}"
       MYSQL_PASSWORD: "${DB_PASS}"
     volumes:
-     - ${DATA_SAVE_PATH}/mysql:/var/lib/mysql
+     - ${VOLUME_DATA_PATH}/mysql:/var/lib/mysql
     networks:
      - sdnet
   redis:
     image: redis:alpine
     env_file: ./.env
     volumes:
-     - ${DATA_SAVE_PATH}/redis:/data
+     - ${VOLUME_DATA_PATH}/redis:/data
     networks:
      - sdnet
 networks:
