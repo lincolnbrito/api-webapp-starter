@@ -16,15 +16,15 @@ api() {
 }
 
 angular() {
-    echo "Construindo a imagem ${USER}/node-agular-cli:${TIMESTAMP}"
-    docker build -f node-agular-cli/Dockerfile -t ${USER}/node-agular-cli:${TIMESTAMP} .
+    echo "Construindo a imagem ${USER}/node-angular-cli:${TIMESTAMP}"
+    docker build -f node-angular-cli/Dockerfile -t ${USER}/node-angular-cli:${TIMESTAMP} .
 
     echo "Marcando a tag latest também"
-    docker tag ${USER}/node-agular-cli:${TIMESTAMP} ${USER}/node-agular-cli:latest
+    docker tag ${USER}/node-angular-cli:${TIMESTAMP} ${USER}/node-angular-cli:latest
 
     #echo "Enviando a imagem para nuvem docker"
-    #docker push ${USER}/node-agular-cli:${TIMESTAMP}
-    #docker push ${USER}/node-agular-cli:latest
+    #docker push ${USER}/node-angular-cli:${TIMESTAMP}
+    #docker push ${USER}/node-angular-cli:latest
 }
 
 vue() {

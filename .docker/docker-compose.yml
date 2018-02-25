@@ -31,21 +31,21 @@ services:
      - '3000:3000'
     networks:
      - sdnet
-  # webapp-angular:    
-  #   build:
-  #     context: ./webapp
-  #     dockerfile: Dockerfile-angular
-  #   command: ng serve --host 0.0.0.0 -lr --poll 200
-  #   restart: always
-  #   image: lincolnbrito/webapp-angular 
-  #   volumes:
-  #    - ${WEBAPP_ANGULAR_DIR}/client/:/var/www/html     
-  #   ports:
-  #    - "${WEBAPP_ANGULAR_PORT}:4200"
-  #    - "49153:49153"
-  #    - '3000:3000' 
-  #   networks:
-  #    - sdnet
+  node-angular-cli:    
+    build:
+      context: ./node-angular-cli
+      dockerfile: Dockerfile
+    command: ng serve --host 0.0.0.0 -lr --poll 200
+    restart: always
+    image: lincolnbrito/node-angular-cli 
+    volumes:
+     - ${WEBAPP_ANGULAR_DIR}/:/var/www/html     
+    ports:
+     - "${WEBAPP_ANGULAR_PORT}:4200"
+     - "49153:49153"
+     - '3000:3000' 
+    networks:
+     - sdnet
   mysql:
     image: mysql:5.7
     env_file: .env
