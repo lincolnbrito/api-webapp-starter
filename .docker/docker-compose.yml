@@ -58,15 +58,17 @@ services:
       MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
     volumes:
      - ${VOLUME_DATA_PATH}/mysql:/var/lib/mysql
+     # - ./docker/mysql/conf.d:/etc/mysql/conf.d
+     # - ./docker/mysql/logs:/var/log/mysql
     networks:
      - sdnet
-  # redis:
-  #   image: redis:alpine
-  #   env_file: ./.env
-  #   volumes:
-  #    - ${VOLUME_DATA_PATH}/redis:/data
-  #   networks:
-  #    - sdnet
+  redis:
+    image: redis:alpine
+    env_file: ./.env
+    volumes:
+     - ${VOLUME_DATA_PATH}/redis:/data
+    networks:
+     - sdnet
 networks:
   sdnet:
     driver: "bridge"
