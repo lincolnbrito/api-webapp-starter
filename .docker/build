@@ -1,5 +1,51 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-docker build -f webapp/Dockerfile-vue -t lincolnbrito/webapp-vue:latest ./webapp
-docker build -f webapp/Dockerfile-angular -t lincolnbrito/webapp-angular:latest ./webapp
-docker build -f api/Dockerfile -t lincolnbrito/api:latest ./api
+USER="lincolnbrito"
+TIMESTAMP=$(date "+%Y.%m.%d-%H.%M")
+
+build_api() {
+    echo "Construindo a imagem ${USER}/api:${TIMESTAMP}"
+    docker build -f api/Dockerfile -t ${USER}/api:${TIMESTAMP} .
+
+    echo "Marcando a tag latest também"
+    docker tag ${USER}/api:${TIMESTAMP} ${USER}/api:latest
+
+    #echo "Enviando a imagem para nuvem docker"
+    #docker push ${USER}/api:${TIMESTAMP}
+    #docker push ${USER}/api:latest
+}
+
+build_angular() {
+    echo "Construindo a imagem ${USER}/node-agular-cli:${TIMESTAMP}"
+    docker build -f node-agular-cli/Dockerfile -t ${USER}/node-agular-cli:${TIMESTAMP} .
+
+    echo "Marcando a tag latest também"
+    docker tag ${USER}/node-agular-cli:${TIMESTAMP} ${USER}/node-agular-cli:latest
+
+    #echo "Enviando a imagem para nuvem docker"
+    #docker push ${USER}/node-agular-cli:${TIMESTAMP}
+    #docker push ${USER}/node-agular-cli:latest
+}
+
+build_vue() {
+    echo "Construindo a imagem ${USER}/node-vue-cli:${TIMESTAMP}"
+    docker build -f node-vue-cli/Dockerfile -t ${USER}/node-vue-cli:${TIMESTAMP} .
+
+    echo "Marcando a tag latest também"
+    docker tag ${USER}/node-vue-cli:${TIMESTAMP} ${USER}/node-vue-cli:latest
+
+    #echo "Enviando a imagem para nuvem docker"
+    #docker push ${USER}/node-vue-cli:${TIMESTAMP}
+    #docker push ${USER}/node-vue-cli:latest
+}
+
+build_all() {
+    build_api
+    build_angular
+    build_vue
+}
+
+
+#docker build -f webapp/Dockerfile-vue -t lincolnbrito/webapp-vue:latest ./webapp
+#docker build -f webapp/Dockerfile-angular -t lincolnbrito/webapp-angular:latest ./webapp
+#docker build -f api/Dockerfile -t lincolnbrito/api:latest ./api
