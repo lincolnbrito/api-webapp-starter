@@ -1,9 +1,9 @@
 #!/bin/bash
 
 USER="lincolnbrito"
-TIMESTAMP=$(date "+%Y.%m.%d-%H.%M")
+TIMESTAMP=$(date "+%Y.%m.%d-%H%M")
 
-build_api() {
+api() {
     echo "Construindo a imagem ${USER}/api:${TIMESTAMP}"
     docker build -f api/Dockerfile -t ${USER}/api:${TIMESTAMP} .
 
@@ -15,7 +15,7 @@ build_api() {
     #docker push ${USER}/api:latest
 }
 
-build_angular() {
+angular() {
     echo "Construindo a imagem ${USER}/node-agular-cli:${TIMESTAMP}"
     docker build -f node-agular-cli/Dockerfile -t ${USER}/node-agular-cli:${TIMESTAMP} .
 
@@ -27,7 +27,7 @@ build_angular() {
     #docker push ${USER}/node-agular-cli:latest
 }
 
-build_vue() {
+vue() {
     echo "Construindo a imagem ${USER}/node-vue-cli:${TIMESTAMP}"
     docker build -f node-vue-cli/Dockerfile -t ${USER}/node-vue-cli:${TIMESTAMP} .
 
@@ -39,12 +39,13 @@ build_vue() {
     #docker push ${USER}/node-vue-cli:latest
 }
 
-build_all() {
+all() {
     build_api
     build_angular
     build_vue
 }
 
+"$@"
 
 #docker build -f webapp/Dockerfile-vue -t lincolnbrito/webapp-vue:latest ./webapp
 #docker build -f webapp/Dockerfile-angular -t lincolnbrito/webapp-angular:latest ./webapp
