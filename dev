@@ -99,35 +99,31 @@ if [ $# -gt 0 ]; then
         shift 1
         $COMPOSE run --rm -w "//var//www//html" api ./vendor/bin/phpunit "$@"
 
-    # If "vue" is used, run npm
-    # from our node container
+    # If "vue" is used, run vue from node-vue-cli container
     elif [ "$1" == "vue" ]; then
         shift 1
-        $COMPOSE run --rm -w "//var//www//html" webapp-vue vue "$@"
+        $COMPOSE run --rm -w "//var//www//html" node-vue-cli vue "$@"
     
-    # If "vue" is used, run npm
-    # from our node container
+    # If "angular" is used, run angular from node-angular-cli container
     elif [ "$1" == "angular" ]; then
         shift 1
-        $COMPOSE run --rm -w "//var//www//html" webapp-angular ng "$@"
+        $COMPOSE run --rm -w "//var//www//html" node-angular-cli ng "$@"
         
     # If "npm" is used, run npm
     # from our node container
     elif [ "$1" == "npm" ]; then        
         shift 1
-        $COMPOSE run --rm -w "//var//www//html" webapp-vue npm "$@"    
+        $COMPOSE run --rm -w "//var//www//html" node-vue-cli npm "$@"    
     
-    # If "gulp" is used, run gulp
-    # from our node container
+    # If "gulp" is used, run gulp from node-vue-cli container
     elif [ "$1" == "gulp" ]; then
         shift 1
-        $COMPOSE run --rm -w "//var/www/html" webapp-vue gulp "$@"
+        $COMPOSE run --rm -w "//var/www/html" node-vue-cli gulp "$@"
     
-    # If "webpack" is used, run webpack
-    # from our node container
+    # If "webpack" is used, run webpack from node-vue-cli container
     elif [ "$1" == "webpack" ]; then
         shift 1
-        $COMPOSE run --rm -w "//var/www/html" webapp-vue webpack "$@"
+        $COMPOSE run --rm -w "//var/www/html" node-vue-cli webpack "$@"
         
     # Else, pass-thru args to docker-compose
     else
