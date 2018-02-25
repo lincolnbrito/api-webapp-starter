@@ -12,6 +12,7 @@ services:
       WWWUSER: "${WWWUSER}"
     volumes:
      - ${API_DIR}/:/var/www/html
+     - ${COMPOSER_CACHE_DIR}:/home/vessel/.composer
     ports:
      - "${API_PORT}:80"   
     networks:
