@@ -1,11 +1,11 @@
 #!/bin/bash
 
 USER="lincolnbrito"
-TIMESTAMP=$(date "+%Y.%m.%d-%H%M")
+TIMESTAMP=$(date "+%Y%m%d%H%M")
 
 api() {
     echo "Construindo a imagem ${USER}/api:${TIMESTAMP}"
-    docker build -f api/Dockerfile -t ${USER}/api:${TIMESTAMP} .
+    docker build -f api/Dockerfile -t ${USER}/api:${TIMESTAMP} ./api
 
     echo "Marcando a tag latest também"
     docker tag ${USER}/api:${TIMESTAMP} ${USER}/api:latest
