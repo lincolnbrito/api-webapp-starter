@@ -16,21 +16,21 @@ services:
      - "${API_PORT}:80"   
     networks:
      - sdnet
-  # webapp-vue:    
-  #   build:
-  #     context: ./webapp
-  #     dockerfile: Dockerfile-vue
-  #   command: yarn run start
-  #   restart: always
-  #   image: lincolnbrito/webapp-vue  
-  #   volumes:
-  #    - ${WEBAPP_VUE_DIR}/:/var/www/html     
-  #   ports:
-  #    - "${WEBAPP_VUE_PORT}:8080"
-  #    - "35729:35729"
-  #    - '3000:3000'
-  #   networks:
-  #    - sdnet
+  node-vue-cli:    
+    build:
+      context: ./node-vue-cli
+      dockerfile: Dockerfile
+    command: yarn run start
+    restart: always
+    image: lincolnbrito/node-vue-cli 
+    volumes:
+     - ${WEBAPP_VUE_DIR}/:/var/www/html     
+    ports:
+     - "${WEBAPP_VUE_PORT}:8080"
+     - "35729:35729"
+     - '3000:3000'
+    networks:
+     - sdnet
   # webapp-angular:    
   #   build:
   #     context: ./webapp

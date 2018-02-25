@@ -71,12 +71,12 @@ COMPOSE="docker-compose -f ./docker-compose.yml"
 
 # if we pass any arguments...
 if [ $# -gt 0 ]; then
-    # if "artisan" is used, pass-thru to "artisan"
+    # if "clean" is used, stop services em remove containers
     if [ "$1" == "clean" ]; then
         shift 1
         $COMPOSE stop && $COMPOSE rm -f
 
-     # if "artisan" is used, pass-thru to "artisan"
+     # if "destroy" is used, stop services, remove containers and remove volumes
     elif [ "$1" == "destroy" ]; then
         shift 1
         $COMPOSE stop && $COMPOSE rm -f
