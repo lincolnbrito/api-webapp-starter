@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Based on https://github.com/shipping-docker/vessel
+
 # Make sure we have our default command
 # ./develop
 
