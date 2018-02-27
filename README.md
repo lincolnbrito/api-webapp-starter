@@ -23,9 +23,8 @@ Available commands:
 
 ## Images
 ### api
-- PHP 7.2
-- ngnix (latest)
-- composer (latest)
+Contains: PHP 7.2, ngnix (latest), composer (latest)
+
 ### mysql
 - MySQL 5.7
 ### node-angular-cli
@@ -38,3 +37,7 @@ Available commands:
 - yarn (latest)
 - webpack (v3.10.0)
 - vue-cli (v2.9.3)
+
+
+Notes:
+- If Windows use Git CMD instead Git Bash as described [here](http://willi.am/blog/2016/08/08/docker-for-windows-interactive-sessions-in-mintty-git-bash/)
