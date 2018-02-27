@@ -66,6 +66,7 @@ export WWWUSER=${WWWUSER:-$UID}
 
 cd .docker 
 
+BUILD="./build"
 DOCKER="docker"
 COMPOSE="docker-compose -f ./docker-compose.yml"
 
@@ -76,7 +77,12 @@ if [ $# -gt 0 ]; then
         shift 1
         $COMPOSE stop && $COMPOSE rm -f
 
-     # if "destroy" is used, stop services, remove containers and remove volumes
+    # if "build" is used, pass-thru to "build" inside .docker
+    elif [ "$1" == "build" ]; then
+        shift 1
+        $BUILD "$@"       
+    
+    # if "destroy" is used, stop services, remove containers and remove volumes
     elif [ "$1" == "destroy" ]; then
         shift 1
         $COMPOSE stop && $COMPOSE rm -f
@@ -98,6 +104,11 @@ if [ $# -gt 0 ]; then
     elif [ "$1" == "test" ]; then
         shift 1
         $COMPOSE run --rm -w "//var//www//html" api ./vendor/bin/phpunit "$@"
+
+    # If "node" is used, run commands inside node-vue-cli container
+    elif [ "$1" == "node" ]; then
+        shift 1
+        $COMPOSE run --rm -w "//var//www//html" node-vue-cli "$@"
 
     # If "vue" is used, run vue from node-vue-cli container
     elif [ "$1" == "vue" ]; then

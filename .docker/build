@@ -45,7 +45,16 @@ all() {
     build_vue
 }
 
-"$@"
+if [ $# -gt 0 ]; then
+    "$@"
+else
+    echo "#### Script de build de imagens docker ####"
+    echo "Opções:"
+    echo "- build all:      constrói todas as imagens"
+    echo "- build angular:  constrói a imagem node-angular-cli"
+    echo "- build vue:      constrói a imagem node-vue-cli"
+    echo "- build api:      constrói a imagem api (laravel)"
+fi
 
 #docker build -f webapp/Dockerfile-vue -t lincolnbrito/webapp-vue:latest ./webapp
 #docker build -f webapp/Dockerfile-angular -t lincolnbrito/webapp-angular:latest ./webapp
