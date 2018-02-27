@@ -2,6 +2,43 @@
 
 This is a starter base to create and manage API/Webapp stack using docker
 
+## Structure Dir
+<pre>
+/
+|
+|_.docker
+|    |__api
+|    |
+|    |__mysql
+|    |    |__ conf.d
+|    |    |__ logs
+|    |
+|    |__node-angular-cli
+|    |    |__ Dockerfile
+|    |
+|    |__node-vue-cli
+|    |    |__ Dockerfile
+|    |
+|    |__volume-data
+|    |
+|    |_ .env-example
+|    |_ .gitignore
+|    |_ build
+|    |_ docker-compose.yml
+|
+|__api - API code
+|
+|__webapp
+|  |__angular - angular apps
+|  |__vue - vue apps
+|
+|_ .gitignore
+|
+|- dev - Script
+|
+|_ README.md - This file
+</pre> 
+
 ## dev CLI
 
 Usage: `./dev <COMMAND>`
