@@ -89,7 +89,7 @@ Contains: PHP 7.2, ngnix (latest), composer (latest)
 ### Api
 | Variable | Default |
 |----------|---------|
-|`COMPOSER_CACHE_DIR`|`/f/WWW/.composer_cache`|
+|`COMPOSER_CACHE_DIR`|`../.composer_cache`|
 |`WWWUSER`|`1337`|
 |`API_DIR`|..\`api`|
 |`API_ENV`|`local`|
