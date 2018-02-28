@@ -87,24 +87,32 @@ Contains: PHP 7.2, ngnix (latest), composer (latest)
 
 ## Enviroment Variables
 ### Api
-- `COMPOSER_CACHE_DIR=/f/WWW/.composer_cache`
-- `WWWUSER=1337`
-- `API_DIR=../api`
-- `API_ENV=local`
-- `API_PORT=80`
+| Variable | Default |
+|----------|---------|
+|`COMPOSER_CACHE_DIR`|`/f/WWW/.composer_cache`|
+|`WWWUSER`|`1337`|
+|`API_DIR`|..\`api`|
+|`API_ENV`|`local`|
+|`API_PORT`|`80`|
 ### MySQL
-- `MYSQL_PORT=3306`
-- `MYSQL_ROOT_PASSWORD=secret`
-- `MYSQL_DATABASE=api_webapp_db`
-- `MYSQL_USER=api_webapp_user`
-- `MYSQL_PASSWORD=secret`
+| Variable | Default |
+|----------|---------|
+|`MYSQL_PORT`|`3306`|
+|`MYSQL_ROOT_PASSWORD`|`secret`|
+|`MYSQL_DATABASE`|`api_webapp_db`|
+|`MYSQL_USER`|`api_webapp_user`|
+|`MYSQL_PASSWORD`|`secret`|
 ### Webapps
-- `WEBAPP_VUE_DIR=..\webapp\vue`
-- `WEBAPP_VUE_PORT=8080`
-- `WEBAPP_ANGULAR_DIR=../webapp/angular`
-- `WEBAPP_ANGULAR_PORT=4200`
+| Variable | Default |
+|----------|---------|
+|`WEBAPP_VUE_DIR`|`..\webapp\`vue`|
+|`WEBAPP_VUE_PORT`|`8080`|
+|`WEBAPP_ANGULAR_DIR`|`../webapp/angular`|
+|`WEBAPP_ANGULAR_PORT`|`4200`|
 ### Shared Data
-- `VOLUME_DATA_PATH=./volume-data`
+| Variable | Default |
+|----------|---------|
+|`VOLUME_DATA_PATH`|`./volume-data`|
 
 ## Notes:
 - If using Windows prefer to use Git CMD instead Git Bash as described [here](http://willi.am/blog/2016/08/08/docker-for-windows-interactive-sessions-in-mintty-git-bash/)
