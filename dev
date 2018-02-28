@@ -98,18 +98,21 @@ if [ $# -gt 0 ]; then
     
     # if "artisan" is used, pass-thru to "artisan"
     elif [ "$1" == "bash" ]; then
-        # shift 1            
-        # $COMPOSE run -u vessel -w "//var//www//html" api bash
         shift 1
         if [ "$EXEC" == "yes" ]; then
             $COMPOSE exec -u vessel -w "//var//www//html" api bash
         else
             $COMPOSE run --rm -w "//var//www//html" api bash
         fi
+
     # if "artisan" is used, pass-thru to "artisan"
     elif [ "$1" == "php" ]; then
-        shift 1        
-        $COMPOSE run --rm -w "//var//www//html" api php "$@"
+        shift 1
+        if [ "$EXEC" == "yes" ]; then
+            $COMPOSE exec -u vessel -w "//var//www//html" api php "$@"
+        else
+            $COMPOSE run --rm -w "//var//www//html" api php "$@"
+        fi    
 
     # if "artisan" is used, pass-thru to "artisan"
     elif [ "$1" == "artisan" ]; then
