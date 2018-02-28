@@ -68,7 +68,7 @@ cd .docker
 BUILD="./build"
 DOCKER="docker"
 COMPOSE="docker-compose -f ./docker-compose.yml"
-
+WORKDIR="//var//www//html"
 
 # Is the environment running
 PSRESULT="$(docker-compose ps -q)"
@@ -100,67 +100,67 @@ if [ $# -gt 0 ]; then
     elif [ "$1" == "bash" ]; then
         shift 1
         if [ "$EXEC" == "yes" ]; then
-            $COMPOSE exec -u vessel -w "//var//www//html" api bash
+            $COMPOSE exec -u vessel -w $WORKDIR api bash
         else
-            $COMPOSE run --rm -w "//var//www//html" api bash
+            $COMPOSE run --rm -w $WORKDIR api bash
         fi
 
     # if "artisan" is used, pass-thru to "artisan"
     elif [ "$1" == "php" ]; then
         shift 1
         if [ "$EXEC" == "yes" ]; then
-            $COMPOSE exec -u vessel -w "//var//www//html" api php "$@"
+            $COMPOSE exec -u vessel -w $WORKDIR api php "$@"
         else
-            $COMPOSE run --rm -w "//var//www//html" api php "$@"
+            $COMPOSE run --rm -w $WORKDIR api php "$@"
         fi    
 
     # if "artisan" is used, pass-thru to "artisan"
     elif [ "$1" == "artisan" ]; then
         shift 1        
-        $COMPOSE run --rm -w "//var//www//html" api php artisan "$@"
+        $COMPOSE run --rm -w $WORKDIR api php artisan "$@"
 
     # If "composer" is used, pass-thru to "composer"
     # inside a new container
     elif [ "$1" == "composer" ]; then
         shift 1
-        $COMPOSE run --rm -w "//var//www//html" api composer "$@"
+        $COMPOSE run --rm -w $WORKDIR api composer "$@"
     
     # If "test" is used, run unit tests,
     # pass-thru any extra arguments to php-unit
     elif [ "$1" == "test" ]; then
         shift 1
-        $COMPOSE run --rm -w "//var//www//html" api ./vendor/bin/phpunit "$@"
+        $COMPOSE run --rm -w $WORKDIR api ./vendor/bin/phpunit "$@"
 
     # If "node" is used, run commands inside node-vue-cli container
     elif [ "$1" == "node" ]; then
         shift 1
-        $COMPOSE run --rm -w "//var//www//html" node-vue-cli "$@"
+        $COMPOSE run --rm -w $WORKDIR node-vue-cli "$@"
 
     # If "vue" is used, run vue from node-vue-cli container
     elif [ "$1" == "vue" ]; then
         shift 1
-        $COMPOSE run --rm -w "//var//www//html" node-vue-cli vue "$@"
+        $COMPOSE run --rm -w $WORKDIR node-vue-cli vue "$@"
     
     # If "angular" is used, run angular from node-angular-cli container
     elif [ "$1" == "angular" ]; then
         shift 1
-        $COMPOSE run --rm -w "//var//www//html" node-angular-cli ng "$@"
+        $COMPOSE run --rm -w $WORKDIR node-angular-cli ng "$@"
         
     # If "npm" is used, run npm
     # from our node container
     elif [ "$1" == "npm" ]; then        
         shift 1
-        $COMPOSE run --rm -w "//var//www//html" node-vue-cli npm "$@"    
+        $COMPOSE run --rm -w $WORKDIR node-vue-cli npm "$@"    
     
     # If "gulp" is used, run gulp from node-vue-cli container
     elif [ "$1" == "gulp" ]; then
         shift 1
-        $COMPOSE run --rm -w "//var//www//html" node-vue-cli gulp "$@"
+        $COMPOSE run --rm -w $WORKDIR node-vue-cli gulp "$@"
     
     # If "webpack" is used, run webpack from node-vue-cli container
     elif [ "$1" == "webpack" ]; then
         shift 1
-        $COMPOSE run --rm -w "//var//www//html" node-vue-cli webpack "$@"
+        $COMPOSE run --rm -w $WORKDIR node-vue-cli webpack "$@"
         
     # Else, pass-thru args to docker-compose
     else
