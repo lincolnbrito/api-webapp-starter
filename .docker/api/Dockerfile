@@ -33,7 +33,24 @@ RUN echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu xenial main" > /etc/apt
        php7.2-intl php7.2-readline php7.2-xdebug \
        php-msgpack php-igbinary  \
     && php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
-    && mkdir /run/php \
+    && mkdir /run/php
+
+RUN apt-get install -y dos2unix 
+
+EXPOSE 80
+COPY h5bp /etc/nginx/h5bp
+COPY default /etc/nginx/sites-available/default
+COPY php-fpm.conf /etc/php/7.2/fpm/php-fpm.conf
+COPY xdebug.ini /etc/php/7.2/mods-available/xdebug.ini
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+RUN echo "teste"
+
+COPY entrypoint.sh /entrypoint.sh
+
+# Fix line-ending issues with Windows
+RUN dos2unix /entrypoint.sh \
+    && apt-get --purge remove -y dos2unix \
     && apt-get -y autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
@@ -42,15 +59,6 @@ RUN echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu xenial main" > /etc/apt
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log
 
-EXPOSE 80
-COPY h5bp /etc/nginx/h5bp
-COPY default /etc/nginx/sites-available/default
-COPY php-fpm.conf /etc/php/7.2/fpm/php-fpm.conf
-COPY xdebug.ini /etc/php/7.2/mods-available/xdebug.ini
+#RUN chmod +x /entrypoint.sh
 
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY start-container.sh /start-container.sh
-
-RUN chmod +x /start-container.sh
-
-ENTRYPOINT ["/start-container.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
