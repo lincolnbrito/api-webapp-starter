@@ -64,15 +64,20 @@ elif [ "$MACHINE" == "mingw64" ]; then # Git Bash
     SEDCMD="sed -i"
 fi
 
-export WWWUSER=${WWWUSER:-$UID}
 
-cd .docker 
-
+cd .docker
 BUILD="./build"
 DOCKER="docker"
 COMPOSE="docker-compose -f ./docker-compose.yml"
 
-API_DIR="../api"
+
+# Is the environment running
+PSRESULT="$(docker-compose ps -q)"
+if [ ! -z "$PSRESULT" ]; then
+    EXEC="yes"
+else
+    EXEC="no"
+fi
 
 # if we pass any arguments...
 if [ $# -gt 0 ]; then
@@ -94,9 +99,14 @@ if [ $# -gt 0 ]; then
     
     # if "artisan" is used, pass-thru to "artisan"
     elif [ "$1" == "bash" ]; then
-        shift 1            
-        $COMPOSE run --rm api "$@"
-
+        # shift 1            
+        # $COMPOSE run -u vessel -w "//var//www//html" api bash
+        shift 1
+        if [ "$EXEC" == "yes" ]; then
+            $COMPOSE exec -u vessel -w "//var//www//html" api bash
+        else
+            $COMPOSE run --rm -w "//var//www//html" api bash
+        fi
     # if "artisan" is used, pass-thru to "artisan"
     elif [ "$1" == "php" ]; then
         shift 1        
@@ -143,12 +153,12 @@ if [ $# -gt 0 ]; then
     # If "gulp" is used, run gulp from node-vue-cli container
     elif [ "$1" == "gulp" ]; then
         shift 1
-        $COMPOSE run --rm -w "//var/www/html" node-vue-cli gulp "$@"
+        $COMPOSE run --rm -w "//var//www//html" node-vue-cli gulp "$@"
     
     # If "webpack" is used, run webpack from node-vue-cli container
     elif [ "$1" == "webpack" ]; then
         shift 1
-        $COMPOSE run --rm -w "//var/www/html" node-vue-cli webpack "$@"
+        $COMPOSE run --rm -w "//var//www//html" node-vue-cli webpack "$@"
         
     # Else, pass-thru args to docker-compose
     else

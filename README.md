@@ -47,7 +47,7 @@ Available commands:
  - clean: stop services and remove containers. Equivalent to *`$ docker-compose stop && docker-compose rm -f`*
  - build: pass-thru to "build" (inside .docker) that build the images. Equivalent to *`$ ./docker/build <command>`*. `<command>`: all, api, angular and vue
  - destroy: stop services, remove containers and remove volumes. Equivalent to: *`$ docker-compose stop && docker-compose rm -f`* and *`$ docker volume rm $( $DOCKER volume ls -qf dangling=true)`*
- - artisan: pass-thru to "artisan" inside api container. Equivalent to: *`$ docker-compose run --rm -w "//var//www//html" api php artisan <command>`*
+- artisan: pass-thru to "artisan" inside api container. Equivalent to: *`$ docker-compose run --rm -w "//var//www//html" api php artisan <command>`*
  - composer
  - test
  - node

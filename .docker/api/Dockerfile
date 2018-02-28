@@ -42,15 +42,15 @@ RUN echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu xenial main" > /etc/apt
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log
 
+EXPOSE 80
 COPY h5bp /etc/nginx/h5bp
 COPY default /etc/nginx/sites-available/default
 COPY php-fpm.conf /etc/php/7.2/fpm/php-fpm.conf
 COPY xdebug.ini /etc/php/7.2/mods-available/xdebug.ini
 
-EXPOSE 80
-
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY start-container /usr/local/bin/start-container
-RUN chmod +x /usr/local/bin/start-container
+COPY start-container.sh /start-container.sh
 
-ENTRYPOINT ["start-container"]
+RUN chmod +x /start-container.sh
+
+ENTRYPOINT ["/start-container.sh"]
