@@ -72,6 +72,8 @@ BUILD="./build"
 DOCKER="docker"
 COMPOSE="docker-compose -f ./docker-compose.yml"
 
+API_DIR="../api"
+
 # if we pass any arguments...
 if [ $# -gt 0 ]; then
     # if "clean" is used, stop services em remove containers
@@ -89,7 +91,17 @@ if [ $# -gt 0 ]; then
         shift 1
         $COMPOSE stop && $COMPOSE rm -f
         $DOCKER volume rm $( $DOCKER volume ls -qf dangling=true )
-        
+    
+    # if "artisan" is used, pass-thru to "artisan"
+    elif [ "$1" == "bash" ]; then
+        shift 1            
+        $COMPOSE run --rm api "$@"
+
+    # if "artisan" is used, pass-thru to "artisan"
+    elif [ "$1" == "php" ]; then
+        shift 1        
+        $COMPOSE run --rm -w "//var//www//html" api php "$@"
+
     # if "artisan" is used, pass-thru to "artisan"
     elif [ "$1" == "artisan" ]; then
         shift 1        
