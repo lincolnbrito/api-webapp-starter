@@ -2,7 +2,7 @@
 
 This is a starter base to create and manage API/Webapp stack using docker
 
-## Structure Dir
+## Directories
 <pre>
 /
 |
@@ -40,22 +40,30 @@ This is a starter base to create and manage API/Webapp stack using docker
 </pre> 
 
 ## dev CLI
+A utilitary script to help with workflow.
 
-Usage: `./dev <COMMAND>`
+Usage:
+```
+./dev <COMMAND>
+```
 
 Available commands:
- - clean: stop services and remove containers. Equivalent to *`$ docker-compose stop && docker-compose rm -f`*
- - build: pass-thru to "build" (inside .docker) that build the images. Equivalent to *`$ ./docker/build <command>`*. `<command>`: all, api, angular and vue
- - destroy: stop services, remove containers and remove volumes. Equivalent to: *`$ docker-compose stop && docker-compose rm -f`* and *`$ docker volume rm $( $DOCKER volume ls -qf dangling=true)`*
-- artisan: pass-thru to "artisan" inside api container. Equivalent to: *`$ docker-compose run --rm -w "//var//www//html" api php artisan <command>`*
- - composer
- - test
- - node
- - vue
- - angular
- - npm
- - gulp
- - webpack 
+- **up**: start services. `up <service>` to start a single 
+service
+- **down**: stop services. `down <service>` to stop a single service
+- **clean**: stop services and remove containers
+- **build**: pass-thru to "build" script (inside .docker) to build images. 
+- **destroy**: stop services, remove containers and remove volumes. 
+- **bash**: run a bash session inside api container. 
+- **artisan**: run "artisan" inside api container. 
+- **composer**: run "composer" inside api container. 
+- **test**: run "phpunit" tests inside api container
+- **node**: run "node" inside node-vue-cli container. 
+- **vue**: run "vue-cli" inside node-vue-cli container. 
+- **angular**: run "ng-cli" inside node-angular-cli container. 
+- **npm**: run "npm" inside node-vue-cli
+- **gulp**: run "gulp" inside node-vue-cli
+- **webpack**: run "webáck" inside node-vue-cli
         
 
 ## Images
@@ -99,6 +107,6 @@ Contains: PHP 7.2, ngnix (latest), composer (latest)
 ## Notes:
 - If using Windows prefer to use Git CMD instead Git Bash as described [here](http://willi.am/blog/2016/08/08/docker-for-windows-interactive-sessions-in-mintty-git-bash/)
 
-- Error with entrypoint.sh when build image with Windows: 
+- Line-ending issue with entrypoint.sh when build image with Windows: 
     - https://stackoverflow.com/questions/38905135/why-wont-my-docker-entrypoint-sh-execute
     - http://willi.am/blog/2016/08/11/docker-for-windows-dealing-with-windows-line-endings/
