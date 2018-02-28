@@ -48,22 +48,24 @@ Usage:
 ```
 
 Available commands:
-- **up**: start services. `up <service>` to start a single 
-service
-- **down**: stop services. `down <service>` to stop a single service
-- **clean**: stop services and remove containers
-- **build**: pass-thru to "build" script (inside .docker) to build images. 
-- **destroy**: stop services, remove containers and remove volumes. 
-- **bash**: run a bash session inside api container. 
-- **artisan**: run "artisan" inside api container. 
-- **composer**: run "composer" inside api container. 
-- **test**: run "phpunit" tests inside api container
-- **node**: run "node" inside node-vue-cli container. 
-- **vue**: run "vue-cli" inside node-vue-cli container. 
-- **angular**: run "ng-cli" inside node-angular-cli container. 
-- **npm**: run "npm" inside node-vue-cli
-- **gulp**: run "gulp" inside node-vue-cli
-- **webpack**: run "webáck" inside node-vue-cli
+
+|  Command | Description    |
+|---|---|
+| **up** | start services. `up <service>` to start a single service |
+|**down**| stop services. `down <service>` to stop a single service|
+|**clean**| stop services and remove containers|
+|**build**| pass-thru to "build" script (inside .docker) to build images. |
+|**destroy**| stop services, remove containers and remove volumes. |
+|**bash**| run a bash session inside api container. |
+|**artisan**| run "artisan" inside api container. |
+|**composer**| run "composer" inside api container. |
+|**test**| run "phpunit" tests inside api container|
+|**node**| run "node" inside node-vue-cli container. |
+|**vue**| run "vue-cli" inside node-vue-cli container. |
+|**angular**| run "ng-cli" inside node-angular-cli container. |
+|**npm**| run "npm" inside node-vue-cli|
+|**gulp**| run "gulp" inside node-vue-cli|
+|**webpack**| run "webáck" inside node-vue-cli|
         
 
 ## Images
