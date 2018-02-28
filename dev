@@ -22,7 +22,6 @@
 # Run gulp tasks
 # ./develop gulp
 
-#change current dir because docker only read .env in current docker-compose file dir
 UNAMEOUT="$(uname -s)"
 case "${UNAMEOUT}" in
     Linux*)             MACHINE=linux;;
@@ -64,7 +63,7 @@ elif [ "$MACHINE" == "mingw64" ]; then # Git Bash
     SEDCMD="sed -i"
 fi
 
-
+#change current dir because docker only read .env in current docker-compose file dir
 cd .docker
 BUILD="./build"
 DOCKER="docker"
