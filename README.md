@@ -91,7 +91,7 @@ Contains: PHP 7.2, ngnix (latest), composer (latest)
 |----------|---------|
 |`COMPOSER_CACHE_DIR`|`../.composer_cache`|
 |`WWWUSER`|`1337`|
-|`API_DIR`|..\`api`|
+|`API_DIR`|`..\api`|
 |`API_ENV`|`local`|
 |`API_PORT`|`80`|
 ### MySQL
