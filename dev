@@ -152,6 +152,12 @@ if [ $# -gt 0 ]; then
         shift 1
         $COMPOSE run --rm -w $WORKDIR node-vue-cli npm "$@"    
     
+    # If "yarn" is used, run yarn
+    # from our node container
+    elif [ "$1" == "yarn" ]; then        
+        shift 1
+        $COMPOSE run --rm -w $WORKDIR node-vue-cli yarn "$@"
+    
     # If "gulp" is used, run gulp from node-vue-cli container
     elif [ "$1" == "gulp" ]; then
         shift 1
