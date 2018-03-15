@@ -100,9 +100,9 @@ if [ $# -gt 0 ]; then
     elif [ "$1" == "bash" ]; then
         shift 1
         if [ "$EXEC" == "yes" ]; then
-            $COMPOSE exec -u vessel -w $WORKDIR api bash
+            $COMPOSE exec -w $WORKDIR api bash
         else
-            $COMPOSE run -u root --rm -w $WORKDIR api bash
+            $COMPOSE run --rm -w $WORKDIR api bash
         fi
 
     # if "artisan" is used, pass-thru to "artisan"
