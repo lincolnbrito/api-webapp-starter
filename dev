@@ -74,8 +74,10 @@ WORKDIR="//var//www//html"
 PSRESULT="$(docker-compose ps -q)"
 if [ ! -z "$PSRESULT" ]; then
     EXEC="yes"
+    echo "Container is running"
 else
     EXEC="no"
+    echo "Container is NOT running"
 fi
 
 # if we pass any arguments...
