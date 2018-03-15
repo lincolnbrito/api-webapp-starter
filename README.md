@@ -78,6 +78,7 @@ Contains: PHP 7.2, ngnix (latest), composer (latest)
 - Nodejs 8.9.4
 - git(latest)
 - yarn (latest)
+- angular-cli
 ### node-vue-cli
 - Nodejs 8.9.4
 - git (latest)
