@@ -102,7 +102,7 @@ if [ $# -gt 0 ]; then
     elif [ "$1" == "bash" ]; then
         shift 1
         if [ "$EXEC" == "yes" ]; then
-            $COMPOSE exec -u vessel api bash
+            $COMPOSE exec api bash
         else
             $COMPOSE run --rm -w $WORKDIR api bash
         fi
@@ -111,7 +111,7 @@ if [ $# -gt 0 ]; then
     elif [ "$1" == "php" ]; then
         shift 1
         if [ "$EXEC" == "yes" ]; then
-            $COMPOSE exec -u vessel api php "$@"
+            $COMPOSE exec api php "$@"
         else
             $COMPOSE run --rm -w $WORKDIR api php "$@"
         fi    
@@ -120,7 +120,7 @@ if [ $# -gt 0 ]; then
     elif [ "$1" == "artisan" ]; then
         shift 1     
         if [ "$EXEC" == "yes" ]; then
-            $COMPOSE exec -u vessel api php artisan "$@"
+            $COMPOSE exec api php artisan "$@"
         else
             $COMPOSE run --rm -w $WORKDIR api php artisan "$@"
         fi    
@@ -130,7 +130,7 @@ if [ $# -gt 0 ]; then
     elif [ "$1" == "composer" ]; then
         shift 1     
         if [ "$EXEC" == "yes" ]; then
-            $COMPOSE exec -u vessel api composer "$@"
+            $COMPOSE exec api composer "$@"
         else
             $COMPOSE run -u root --rm -w $WORKDIR api composer "$@"
         fi
@@ -140,7 +140,7 @@ if [ $# -gt 0 ]; then
     elif [ "$1" == "test" ]; then
         shift 1
         if [ "$EXEC" == "yes" ]; then
-            $COMPOSE exec -u vessel api ./vendor/bin/phpunit "$@"
+            $COMPOSE exec api ./vendor/bin/phpunit "$@"
         else
             $COMPOSE run --rm -w $WORKDIR api ./vendor/bin/phpunit "$@"
         fi        
@@ -149,7 +149,7 @@ if [ $# -gt 0 ]; then
     elif [ "$1" == "node" ]; then
         shift 1
         if [ "$EXEC" == "yes" ]; then
-            $COMPOSE exec -u vessel node-vue-cli "$@"
+            $COMPOSE exec node-vue-cli "$@"
         else
             $COMPOSE run --rm -w $WORKDIR node-vue-cli "$@"
         fi       
@@ -157,18 +157,14 @@ if [ $# -gt 0 ]; then
 
     # If "vue" is used, run vue from node-vue-cli container
     elif [ "$1" == "vue" ]; then
-        shift 1
-        if [ "$EXEC" == "yes" ]; then
-            $COMPOSE exec -u vessel node-vue-cli vue "$@"
-        else
-            $COMPOSE run --rm -w $WORKDIR node-vue-cli vue "$@"
-        fi        
+        shift 1        
+        $COMPOSE run --rm -w $WORKDIR node-vue-cli vue "$@"        
     
     # If "angular" is used, run angular from node-angular-cli container
     elif [ "$1" == "angular" ]; then
         shift 1
         if [ "$EXEC" == "yes" ]; then
-            $COMPOSE exec -u vessel node-angular-cli ng "$@"
+            $COMPOSE exec node-angular-cli ng "$@"
         else
             $COMPOSE run --rm -w $WORKDIR node-angular-cli ng "$@"
         fi        
@@ -178,7 +174,7 @@ if [ $# -gt 0 ]; then
     elif [ "$1" == "npm" ]; then        
         shift 1
         if [ "$EXEC" == "yes" ]; then
-            $COMPOSE exec -u vessel node-vue-cli npm "$@"
+            $COMPOSE exec node-vue-cli npm "$@"
         else
             $COMPOSE run --rm -w $WORKDIR node-vue-cli npm "$@"   
         fi
@@ -188,7 +184,7 @@ if [ $# -gt 0 ]; then
     elif [ "$1" == "yarn" ]; then        
         shift 1
         if [ "$EXEC" == "yes" ]; then
-            $COMPOSE exec -u vessel node-vue-cli yarn "$@"
+            $COMPOSE exec node-vue-cli yarn "$@"
         else
             $COMPOSE run --rm -w $WORKDIR node-vue-cli yarn "$@"
         fi
@@ -197,7 +193,7 @@ if [ $# -gt 0 ]; then
     elif [ "$1" == "gulp" ]; then
         shift 1
         if [ "$EXEC" == "yes" ]; then
-            $COMPOSE exec -u vessel node-vue-cli gulp "$@"
+            $COMPOSE exec node-vue-cli gulp "$@"
         else
             $COMPOSE run --rm -w $WORKDIR node-vue-cli gulp "$@"
         fi        
@@ -206,7 +202,7 @@ if [ $# -gt 0 ]; then
     elif [ "$1" == "webpack" ]; then
         shift 1
         if [ "$EXEC" == "yes" ]; then
-            $COMPOSE exec -u vessel node-vue-cli webpack "$@"
+            $COMPOSE exec node-vue-cli webpack "$@"
         else
             $COMPOSE run --rm -w $WORKDIR node-vue-cli webpack "$@"
         fi     
